@@ -1,18 +1,25 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
-import AllMeetupsPage from "./pages/AllMeetups";
-import NewMeetupPage from "./pages/NewMeetup";
-import FavoritesPage from "./pages/Favorites";
-import Layout from "./components/layout/Layout";
+import AllMeetupsPage from './pages/AllMeetups';
+import NewMeetupPage from './pages/NewMeetup';
+import FavoritesPage from './pages/Favorites';
+import Layout from './components/layout/Layout';
+import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
   return (
-    <Layout >
-      <Routes>
-        <Route path="/" element={<AllMeetupsPage />} />
-        <Route path="/new-meetup" element={<NewMeetupPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-      </Routes>
+    <Layout>
+      <Switch>
+        <Route path="/" exact>
+          <AllMeetupsPage />
+        </Route>
+        <Route path="/new-meetup">
+          <NewMeetupPage />
+        </Route>
+        <Route path="/favorites">
+          <FavoritesPage />
+        </Route>
+      </Switch>
     </Layout>
   );
 }

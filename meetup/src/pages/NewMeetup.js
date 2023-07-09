@@ -1,21 +1,24 @@
-import {useNavigate} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import NewMeetupForm from "../components/meetups/NewMeetupForm";
+import NewMeetupForm from '../components/meetups/NewMeetupForm';
 
 function NewMeetupPage() {
-  const history = useNavigate();
+  const history = useHistory();
 
   function handleMeetup(meetupData) {
-    fetch('https://udemy-react-60eb9-default-rtdb.firebaseio.com/meetups.json', {
-      //data 저장을 위해 Post
-      method: 'POST',
-      body: JSON.stringify(meetupData), //js obj to json
-      headers: {
-        'Content-Type': 'application/json'
+    fetch(
+      'https://udemy-react-60eb9-default-rtdb.firebaseio.com/meetups.json',
+      {
+        //data 저장을 위해 Post
+        method: 'POST',
+        body: JSON.stringify(meetupData), //js obj to json
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }
-    }).then(() => {
+    ).then(() => {
       history('/', {
-        replace: true
+        replace: true,
       }); //navigate to home page
     });
   }
