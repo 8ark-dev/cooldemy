@@ -41,3 +41,15 @@ getStaticProps() 내부 객체에 `props` 뿐만 아니라 `revalidate`를 추�
 ##### context
 
 추가정보를 위한 getStaticProps()의 객체형 매개변수
+
+---
+### getStaticPaths()
+
+dynamic routing을 할 때 getStaticProps에서 바로 가져올 수 없다
+
+> 사전 생성될 페이지의 개수를 Next가 알 수 없기 때문이다.
+
+따라서 이 경우에는 `getStaticPaths`라는 함수에서 사전 생성될 페이지를 객체로 넣어 만들 수 있다.
+
+이 때 fallback 기능을 통해 방문율이 높은 페이지만 pre-render이 가능하다.
+`fallback : 'blocking'`을 하게되면 에러는 안뜨지만 커스텀페이지 대신 빈 페이지로 기다리게할 수 있다. 
