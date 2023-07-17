@@ -61,6 +61,6 @@ SSR에서 페이지 생성을 위해 쓰이는 메소드로 `getStaticProps()`�
 
 getStaticProps()와 다르게 들어오는 요청마다 서버사이드에서 매번 실행하므로 `revalidate` attribute는 필요 없다.
 
-> 매 초마다 여러번 바뀌는 데이터에 대해서는 해당 메소드를 써야 하나 자원을 생각하면 getStaticProps()로 pre-render해두는게 더 이득 아닌가..?
+> 매 초마다 여러번 바뀌는 데이터에 대해서는 해당 메소드를 써야 하나 자원을 생각하면 getStaticProps()로 pre-render해두는게 더 이득 아닌가..? 
 
-getServerSideProps()에서 dynamic routing을 할 때에는  
+getServerSideProps()에서 dynamic routing을 할 때에는 굳이 getStaticPaths와 같은 메소드를 사용할 필요가 없다.
