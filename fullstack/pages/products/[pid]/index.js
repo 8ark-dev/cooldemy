@@ -19,15 +19,25 @@ function ProductDetailPage(props) {
   );
 }
 
-export async function getStaticProps(context) {
-  const { params } = context;
-  const productId = params.pid; // instead of useRouter().query.pid
-
+async function getData() {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData);
 
+  return data;
+}
+
+export async function getStaticProps(context) {
+  const { params } = context;
+  const productId = params.pid; // instead of useRouter().query.pid
+
+  const data = await getData();
+
   const product = data.products.find((p) => p.id === productId);
+
+  if (!product) {
+    return { notFound: true };
+  }
   return {
     props: {
       loadedProduct: product,
@@ -36,13 +46,16 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
+  const data = await getData();
+
+  const ids = data.products.map((product) => product.id);
+
+  const paramWithParams = ids.map(id => ({
+    params: { pid: id }
+  }))
   return {
-    paths: [
-      { params: { pid: "p1" } },
-      { params: { pid: "p2" } },
-      { params: { pid: "p3" } },
-    ],
-    fallback: false, //방문율이 높은 페이지만 pre-rendering
+    paths: paramWithParams,
+    fallback: true, //방문율이 높은 페이지만 pre-rendering
   };
 }
 

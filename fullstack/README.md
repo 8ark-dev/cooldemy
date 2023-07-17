@@ -53,3 +53,14 @@ dynamic routing을 할 때 getStaticProps에서 바로 가져올 수 없다
 
 이 때 fallback 기능을 통해 방문율이 높은 페이지만 pre-render이 가능하다.
 `fallback : 'blocking'`을 하게되면 에러는 안뜨지만 커스텀페이지 대신 빈 페이지로 기다리게할 수 있다. 
+
+---
+### getServerSideProps()
+
+SSR에서 페이지 생성을 위해 쓰이는 메소드로 `getStaticProps()`와 같은 기능을 한다. 따라서 **동시에** 사용해서는 안된다.
+
+getStaticProps()와 다르게 들어오는 요청마다 서버사이드에서 매번 실행하므로 `revalidate` attribute는 필요 없다.
+
+> 매 초마다 여러번 바뀌는 데이터에 대해서는 해당 메소드를 써야 하나 자원을 생각하면 getStaticProps()로 pre-render해두는게 더 이득 아닌가..?
+
+getServerSideProps()에서 dynamic routing을 할 때에는  
