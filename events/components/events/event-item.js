@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Button from '../ui/button';
 import DateIcon from '../icons/date-icon';
 import AddressIcon from '../icons/address-icon';
